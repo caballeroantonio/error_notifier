@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="error_notifier_view_form" model="ir.ui.view">
-            <field name="name">error.tracker.view.form</field>
-            <field name="model">error.tracker</field>
-            <field name="arch" type="xml">
-                <form>
-                    <header>
-                        <button type="object" name="read_local_log" string="Read Local Log"/>
-                    </header>
-                    <group>
-                        <field name="line_number"/>
-                        <field name="error_date"/>
-                        <field name="level"/>
-                        <field name="database"/>
-                        <field name="error_class"/>
-                        <field name="class_error"/>
-                        <field name="error_content"/>
-                    </group>
-                </form>
-            </field>
-        </record>
+	<data>
+		<record id="error_notifier_view_form" model="ir.ui.view">
+			<field name="name">error.tracker.view.form</field>
+			<field name="model">error.tracker</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button type="object" name="read_local_log" string="Read Local Log"/>
+					</header>
+					<group>
+						<field name="line_number"/>
+						<field name="error_date"/>
+						<field name="level"/>
+						<field name="database"/>
+						<field name="error_class"/>
+						<field name="class_error"/>
+						<field name="error_content"/>
+					</group>
+				</form>
+			</field>
+		</record>
 
-        <record id="error_notifier_view_tree" model="ir.ui.view">
-            <field name="name">error.tracker.view.tree</field>
-            <field name="model">error.tracker</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="line_number"/>
-                    <field name="error_date"/>
-                    <field name="level"/>
-                    <field name="database"/>
-                    <field name="error_class"/>
-                    <field name="class_error"/>
-                </tree>
-            </field>
-        </record>
+		<record id="error_notifier_view_tree" model="ir.ui.view">
+			<field name="name">error.tracker.view.tree</field>
+			<field name="model">error.tracker</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="line_number"/>
+					<field name="error_date"/>
+					<field name="level"/>
+					<field name="database"/>
+					<field name="error_class"/>
+					<field name="class_error"/>
+				</tree>
+			</field>
+		</record>
 
-        <record id="error_notifier_view_search" model="ir.ui.view">
-            <field name="name">error.tracker.view.search</field>
-            <field name="model">error.tracker</field>
-            <field name="arch" type="xml">
-                <search>
-                    <group>
-                        <filter string="INFO Log Entry" domain="[('level','=','INFO')]" help="INFO Log Entry"/>
-                        <filter string="WARNING Log Entry" domain="[('level','=','WARNING')]" help="WARNING Log Entry"/>
-                        <filter string="ERROR Log Entry" domain="[('level','=','ERROR')]" help="ERROR Log Entry"/>
-                        <filter string="CRITICAL Log Entry" domain="[('level','=','CRITICAL')]"
-                                help="CRITICAL Log Entry"/>
-                        <filter string="Detailed Errors" domain="[('error_content', '!=', False)]"
-                                help="Displays log entries that have details on an error"/>
-                    </group>
-                </search>
-            </field>
-        </record>
+		<record id="error_notifier_view_search" model="ir.ui.view">
+			<field name="name">error.tracker.view.search</field>
+			<field name="model">error.tracker</field>
+			<field name="arch" type="xml">
+				<search>
+					<group>
+						<filter string="INFO Log Entry" domain="[('level','=','INFO')]" help="INFO Log Entry"/>
+						<filter string="WARNING Log Entry" domain="[('level','=','WARNING')]" help="WARNING Log Entry"/>
+						<filter string="ERROR Log Entry" domain="[('level','=','ERROR')]" help="ERROR Log Entry"/>
+						<filter string="CRITICAL Log Entry" domain="[('level','=','CRITICAL')]"
+								help="CRITICAL Log Entry"/>
+						<filter string="Detailed Errors" domain="[('error_content', '!=', False)]"
+								help="Displays log entries that have details on an error"/>
+					</group>
+				</search>
+			</field>
+		</record>
 
-        <record id="error_notifier_action" model="ir.actions.act_window">
-            <field name="name">Error Tracker</field>
-            <field name="res_model">error.tracker</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="target">current</field>
-        </record>
+		<record id="error_notifier_action" model="ir.actions.act_window">
+			<field name="name">Error Tracker</field>
+			<field name="res_model">error.tracker</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="target">current</field>
+		</record>
 
-        <menuitem id="error_notifier_parent_menu" name="Error Tracking" parent="base.menu_administration"
-                  sequence="80"/>
-        <menuitem id="error_notifier_log_menu" name="Log Analyzer" parent="error_notifier_parent_menu"
-                  action="error_notifier_action" sequence="10"/>
+		<menuitem id="error_notifier_parent_menu" name="Error Tracking" parent="base.menu_administration"
+				  sequence="80"/>
+		<menuitem id="error_notifier_log_menu" name="Log Analyzer" parent="error_notifier_parent_menu"
+				  action="error_notifier_action" sequence="10"/>
 
 
 
-        <record model="ir.cron" id="room_analytic_cron">
-            <field name="name">Error Cron</field>
-            <field name="model_id" ref="model_error_tracker"/>
-            <field name="state">code</field>
-            <field name="code">model.read_local_log()</field>
-            <field name="interval_number">15</field>
-            <field name="interval_type">minutes</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
-        </record>
-    </data>
+		<record model="ir.cron" id="room_analytic_cron">
+			<field name="name">Error Cron</field>
+			<field name="model_id" ref="model_error_tracker"/>
+			<field name="state">code</field>
+			<field name="code">model.read_local_log()</field>
+			<field name="interval_number">15</field>
+			<field name="interval_type">minutes</field>
+			<field name="numbercall">-1</field>
+			<field name="doall" eval="False"/>
+		</record>
+	</data>
 </odoo>
