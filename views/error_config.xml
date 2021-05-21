@@ -18,15 +18,15 @@
 								<div class="o_setting_right_pane">
 									<div class="content-group">
 										<div class="row mt16">
-											<label string="Error" class="col-md-3 o_light_label"/>
+											<label for="error_field" string="Error" class="col-md-3 o_light_label"/>
 											<field name="error_field"/>
-											<label string="Info" class="col-md-3 o_light_label"/>
+											<label for="info_field" string="Info" class="col-md-3 o_light_label"/>
 											<field name="info_field"/>
-											<label string="Warning" class="col-md-3 o_light_label"/>
+											<label for="warning_field" string="Warning" class="col-md-3 o_light_label"/>
 											<field name="warning_field"/>
-											<label string="Critical" class="col-md-3 o_light_label"/>
+											<label for="critical_field" string="Critical" class="col-md-3 o_light_label"/>
 											<field name="critical_field"/>
-											<label string="Send Email" class="col-md-3 o_light_label"/>
+											<label for="send_field" string="Send Email" class="col-md-3 o_light_label"/>
 											<field name="send_field"/>
 										</div>
 									</div>

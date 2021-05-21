@@ -30,16 +30,13 @@ class ErrorTracker(models.Model):
 
 	@api.model
 	def read_local_log(self):
-		#_logger.error("Comenzar")
+		from odoo import tools
+		log_path = tools.config.get('logfile')
 		line_number = 0
 		continuar = True
 		log_entry = None
 		eviar_correo = False
 		parametros = self.env['res.config.settings'].sudo().get_values()
-		#_logger.error(parametros)
-		#_logger.error(parametros['error_field'])
-		#log_path = "D:/Odoo/Modulos11/salon_produccion/odoo-server.log"
-		log_path = "/var/log/odoo/odoo-server.log"
 		last_record = self.env['error.tracker'].search([], limit=1)
 		if last_record:
 			if last_record.line_number > 0:
@@ -47,7 +44,7 @@ class ErrorTracker(models.Model):
 				eviar_correo = True
 			else:
 				line_number = 0
-		with open(log_path, encoding="utf8") as f:
+		with open(log_path, encoding='utf-8', errors='ignore') as f:
 			lines = f.readlines()
 		error_content = ""
 		for line in lines[line_number:]:
